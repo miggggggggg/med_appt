@@ -5,13 +5,17 @@ import heroImg from './assets/hero.png'
 import './App.css'
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../components/Landing_Page/Navbar/Navbar"
+import Landing_Page from "../components/Landing_Page/LandingPage.jsx";
 function App() {
 
+  <Route path="/" element={<Landing_Page/>}/>
 
   return (
    
       <>
        <div className="App">
+        <Landing_Page></Landing_Page>
+
         {/* Set up BrowserRouter for routing */}
         <BrowserRouter>
           {/* Display the Navbar component */}
