@@ -1,62 +1,78 @@
-import "../Sign_Up/Sign_Up.css"
-import { useState } from "react";
+// Following code has been commented with appropriate comments for your reference.
+import React, { useState } from 'react';
+import './Sign_Up.css'
+import { Link, useNavigate } from 'react-router-dom';
+import { API_URL } from '../../../config';
 
-function SignUp(){
+// Function component for Sign Up form
+const Sign_Up = () => {
+    // State variables using useState hook
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [phone, setPhone] = useState('');
+    const [password, setPassword] = useState('');
+    const [showerr, setShowerr] = useState(''); // State to show error messages
+    const navigate = useNavigate(); // Navigation hook from react-router
 
-  const [isValid, setIsValid] = useState(false)
+    // Function to handle form submission
+    const register = async (e) => {
+        e.preventDefault(); // Prevent default form submission
 
+        // API Call to register user
+        const response = await fetch(`${API_URL}/api/auth/register`, {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                name: name,
+                email: email,
+                password: password,
+                phone: phone,
+            }),
+        });
 
-function handleSubmitClick(event){
-    if (document.getElementById("phoneNumber".value != 10)){
-      setIsValid(false)
-    }
-    else{
-      setIsValid(true)
-    }
-    }
+        const json = await response.json(); // Parse the response JSON
 
-    return(
-        <form action="">
-        <div className="formContainer">
-          <h2>Sign up</h2> <p>Already have an account? <a href="#login">login</a></p>
+        if (json.authtoken) {
+            // Store user data in session storage
+            sessionStorage.setItem("auth-token", json.authtoken);
+            sessionStorage.setItem("name", name);
+            sessionStorage.setItem("phone", phone);
+            sessionStorage.setItem("email", email);
 
-        <label for="role">Role:</label>
-        <input type="text" placeholder="enter your role" id="role" required />
+            // Redirect user to home page
+            navigate("/");
+            window.location.reload(); // Refresh the page
+        } else {
+            if (json.errors) {
+                for (const error of json.errors) {
+                    setShowerr(error.msg); // Show error messages
+                }
+            } else {
+                setShowerr(json.error);
+            }
+        }
+    };
 
-        <label for="name">Name:</label>
-        <input type="text" placeholder="enter your name" id="name" required />
-
-        <label for="phoneNumber">Phone Number:</label>
-        <input
-          type="number"
-          placeholder="enter your phone number"
-          id="phoneNumber"
-          required
-        />
-
-        <label for="email">Email</label>
-        <input
-          type="email"
-          placeholder="enter your email"
-          id="email"
-          required
-        />
-
-        <label for="password">Password:</label>
-        <input
-          type="password"
-          placeholder="enter your password"
-          id="password"
-          required
-        />
-
-        {isValid ? <p>account created</p> : "invalid phone number"}
-
-        <button type="submit" className="submit" onClick={handleSubmitClick}>Submit</button>
-        <button type="reset" className="reset">Reset</button>
+    // JSX to render the Sign Up form
+    return (
+        <div className="container" style={{marginTop:'5%'}}>
+            <div className="signup-grid">
+                <div className="signup-form">
+                    <form method="POST" onSubmit={register}>
+                        <div className="form-group">
+                            <label htmlFor="email">Email</label>
+                            <input value={email} onChange={(e) => setEmail(e.target.value)} type="email" name="email" id="email" className="form-control" placeholder="Enter your email" aria-describedby="helpId" />
+                            {showerr && <div className="err" style={{ color: 'red' }}>{showerr}</div>}
+                        </div>
+                        {/* Apply similar logic for other form elements like name, phone, and password to capture user information */}
+                    </form>
+                </div>
+            </div>
         </div>
-      </form>
-    )
+        /* Note: Sign up role is not stored in the database. Additional logic can be implemented for this based on your React code. */
+    );
 }
 
-export default SignUp;
+export default Sign_Up; // Export the Sign_Up component for use in other components
