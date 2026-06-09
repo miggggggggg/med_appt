@@ -1,10 +1,23 @@
 import "../Sign_Up/Sign_Up.css"
+import { useState } from "react";
 
 function SignUp(){
 
+  const [isValid, setIsValid] = useState(false)
+
+
+function handleSubmitClick(event){
+    if (document.getElementById("phoneNumber".value != 10)){
+      setIsValid(false)
+    }
+    else{
+      setIsValid(true)
+    }
+    }
+
     return(
         <form action="">
-        <div class="formContainer">
+        <div className="formContainer">
           <h2>Sign up</h2> <p>Already have an account? <a href="#login">login</a></p>
 
         <label for="role">Role:</label>
@@ -37,9 +50,13 @@ function SignUp(){
           required
         />
 
-        <button type="submit" class="submit">Submit</button>
-        <button type="reset" class="reset">Reset</button>
+        {isValid ? <p>account created</p> : "invalid phone number"}
+
+        <button type="submit" className="submit" onClick={handleSubmitClick}>Submit</button>
+        <button type="reset" className="reset">Reset</button>
         </div>
       </form>
     )
 }
+
+export default SignUp;

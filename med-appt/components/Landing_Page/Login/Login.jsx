@@ -1,15 +1,28 @@
 import "../Login/Login.css"
+import { useState } from "react"
 
 function Login(){
 
+  const [isValid, setIsValid] = useState(false)
+  
+  
+  function handleSubmitClick(event){
+      if (document.getElementById("phoneNumber".value != 10)){
+        setIsValid(false)
+      }
+      else{
+        setIsValid(true)
+      }
+      }
+
     return(
         <form action="">
-      <div class="formContainer">
+      <div className="formContainer">
         <h1>Login</h1>
 
         <h2>
           Don't Have an account?
-          <a class="anchorSignUp" href="#signup">Sign up</a>
+          <a className="anchorSignUp" href="#signup">Sign up</a>
         </h2>
 
         <label for="email">Email:</label>
@@ -28,11 +41,13 @@ function Login(){
           required
         />
 
-        <button type="submit" class="login">Login</button>
-        <button type="reset" class="reset">Reset</button>
+        <button type="submit" className="login" onClick={handleSubmitClick}>Login</button>
+        <button type="reset" className="reset">Reset</button>
 
         <a href="#forgotpw">Forgot Password?</a>
       </div>
     </form>
     )
 }
+
+export default Login;
