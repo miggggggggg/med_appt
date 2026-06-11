@@ -1,20 +1,58 @@
-import "../Navbar/Navbar.css"
+import "../Navbar/Navbar.css";
+import { Link, useNavigate } from "react-router-dom";
 
-function Navbar(){
+function Navbar() {
+  const navigate = useNavigate();
 
-    return(<>
+  const logout = () => {
+    sessionStorage.removeItem("auth-token");
+    sessionStorage.removeItem("name");
+    sessionStorage.removeItem("email");
+    sessionStorage.removeItem("phone");
+
+    navigate("/");
+    window.location.reload();
+  };
+
+  return (
     <div className="navbarContainer">
-      <h2><a className="anchorLink" href="#stayhealthy">StayHealthy</a></h2>
+      <h2>
+        <Link className="anchorLink" to="/">
+          StayHealthy
+        </Link>
+      </h2>
+
       <nav>
         <ul className="navbar">
-          <li><a href="#home">Home</a></li>
-          <li><a href="#appointments">Appointments</a></li>
-          <li><a href="#signUp">Sign up</a></li>
-          <li><a href="#login">Login</a></li>
+          <li>
+            <Link to="/">Home</Link>
+          </li>
+
+          <li>
+            <a href="#appointments">Appointments</a>
+          </li>
+
+          {!sessionStorage.getItem("auth-token") ? (
+            <>
+              <li>
+                <Link to="/signup">Sign Up</Link>
+              </li>
+
+              <li>
+                <Link to="/login">Login</Link>
+              </li>
+            </>
+          ) : (
+            <li>
+              <button className="logoutBtn" onClick={logout}>
+                Logout
+              </button>
+            </li>
+          )}
         </ul>
       </nav>
     </div>
-    </>)
+  );
 }
 
 export default Navbar;
