@@ -1,0 +1,29 @@
+.profile-card {
+  width: 320px;
+  padding: 20px;
+  border-radius: 12px;
+  background: white;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.profile-header {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.profile-avatar {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+}
+
+.profile-email {
+  font-size: 0.9rem;
+  color: gray;
+}
+
+.profile-body p {
+  margin: 6px 0;
+}

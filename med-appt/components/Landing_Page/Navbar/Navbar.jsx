@@ -41,6 +41,10 @@ function Navbar() {
               <li>
                 <Link to="/login">Login</Link>
               </li>
+
+              <button className="profile-btn">Profile ▾</button>
+            
+              
             </>
           ) : (
             <li>

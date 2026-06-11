@@ -1,0 +1,25 @@
+.reports-layout {
+  padding: 20px;
+}
+
+.reports-header {
+  margin-bottom: 20px;
+}
+
+.reports-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+
+.reports-table th,
+.reports-table td {
+  border: 1px solid #ddd;
+  padding: 10px;
+  text-align: left;
+}
+
+.reports-table th {
+  background: #f4f4f4;
+}
