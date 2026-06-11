@@ -6,6 +6,7 @@ import Landing_Page from "../components/Landing_Page/LandingPage.jsx";
 import SignUp from "../components/Landing_Page/Sign_Up/Sign_Up.jsx";
 import Login from "../components/Landing_Page/Login/Login.jsx";
 import InstantConstultation from "../components/InstantConsultationBooking/InstantConsultationBooking/InstantConsultation.jsxs"
+import BookingConsultation from '../components/BookingConsultation.jsx';
 
 function App() {
   return (
