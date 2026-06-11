@@ -2,7 +2,7 @@ import DoctorCard from "./DoctorCard/DoctorCard";
 import FindDoctorSearch from "./InstantConsultationBooking/FindDoctorSearch/FindDoctorSearch";
 import { useState } from "react";
 
-const BookingConsultation = () => {
+const BookingConsultation = ({ setAppointment }) => {
   // Example doctor data (you can replace with API later)
   const doctorsData = [
     {
@@ -62,6 +62,7 @@ const BookingConsultation = () => {
               rating={doctor.rating}
               image={doctor.image}
               profile={doctor.profile}
+              onBook={(data) => setAppointment(data)}
             />
           ))
         ) : (

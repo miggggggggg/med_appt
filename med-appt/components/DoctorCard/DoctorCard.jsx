@@ -7,6 +7,7 @@ const DoctorCard = ({
   rating,
   image,
   profile,
+  onBook,
 }) => {
   const [showForm, setShowForm] = useState(false);
 
