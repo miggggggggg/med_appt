@@ -4,7 +4,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Navbar from "../components/Landing_Page/Navbar/Navbar";
 import Landing_Page from "../components/Landing_Page/LandingPage.jsx";
 import SignUp from "../components/Landing_Page/Sign_Up/Sign_Up.jsx";
-import Login from "../components/Login/Login.jsx";
+import Login from "../components/Landing_Page/Login/Login.jsx";
+import InstantConstultation from "../components/InstantConsultationBooking/InstantConsultationBooking/InstantConsultation.jsxs"
 
 function App() {
   return (
@@ -12,10 +13,14 @@ function App() {
       <Navbar />
 
       <Routes>
-        <Route path="/" element={<Landing_Page />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
-      </Routes>
+  <Route path="/" element={<Landing_Page />} />
+  <Route path="/signup" element={<SignUp />} />
+  <Route path="/login" element={<Login />} />
+  <Route
+    path="/instant-consultation"
+    element={<InstantConsultation />}
+  />
+</Routes>
     </BrowserRouter>
   );
 }
